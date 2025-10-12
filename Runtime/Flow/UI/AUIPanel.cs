@@ -21,7 +21,7 @@ namespace Internal.Runtime.Flow.UI
             Disable(true);
         }
 
-        public void Disable(bool shouldSkipAnimation = false) => _canvasGroup.DOFade(0f, shouldSkipAnimation ? 0f : 0.25f)
+        public virtual Tween Disable(bool shouldSkipAnimation = false) => _canvasGroup.DOFade(0f, shouldSkipAnimation ? 0f : 0.25f)
             .OnStart(() =>
             {
                 _canvasGroup.blocksRaycasts = false;
@@ -29,7 +29,7 @@ namespace Internal.Runtime.Flow.UI
             }).OnComplete(DisableCallback)
             .SetUpdate(true);
 
-        public void Enable() => _canvasGroup.DOFade(1f, 0.25f)
+        public virtual Tween Enable() => _canvasGroup.DOFade(1f, 0.25f)
             .OnStart(() =>
             {
                 _canvasGroup.blocksRaycasts = isInteractable;

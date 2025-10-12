@@ -24,7 +24,6 @@ namespace Internal.Editor
         private const string BuildScenesText = "In Build";
         private const string OtherScenesText = "Other";
         private const string RefreshText = "Refresh";
-        private const int Spacing = 20;
 
         [MenuItem("Tools/just Adam/Scenes Helper")]
         public static void Open() => CreateWindow<ScenesHelperWindow>("Scenes Helper");
@@ -64,8 +63,8 @@ namespace Internal.Editor
             {
                 DrawSceneFields(_buildScenePaths[i], i);
             }
-            
-            GUILayout.Space(Spacing);
+
+            LocalGUIUtilities.Space();
         }
 
         private void DrawOtherScenes()

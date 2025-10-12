@@ -6,6 +6,10 @@ namespace Internal.Editor
 {
     public static class LocalGUIUtilities
     {
+        private const int Spacing = 20;
+        
+        public static void Space() => GUILayout.Space(Spacing);
+        
         public static bool FriendlyReminder(string text) => EditorUtility.DisplayDialog("Friendly Reminder", text, "Yes", "No");
         
         public static void ProgressBar(string text, float value) => EditorUtility.DisplayProgressBar("Progress", text, value);

@@ -9,7 +9,7 @@ namespace Internal.Runtime.Flow.UI
     // ReSharper disable once InconsistentNaming
     public abstract class AUIPanelsProvider : MonoBehaviour
     {
-        [field:SerializeField] public GameObject PanelsParent { get; set; }
+        [field: SerializeField] public GameObject PanelsParent { get; set; }
         
         private Dictionary<Type, Type> _panelTypeByStateTypes = new();
         

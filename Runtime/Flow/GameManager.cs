@@ -9,6 +9,7 @@ using UnityEngine;
 
 namespace Internal.Runtime.Flow
 {
+    [DefaultExecutionOrder(-500)]
     public class GameManager : MonoBehaviour
     {
         [SerializeField] private GameObject uiParent;
@@ -18,13 +19,16 @@ namespace Internal.Runtime.Flow
         private AUIPanel _currentPanel;
         private AState _currentState;
 
-        private void Awake() => GetReferences();
-
-        private void Start()
+        private void Awake()
         {
+            GetReferences();
             InjectSceneDependencies();
             InjectStateDependencies();
             InjectUIDependencies();
+        }
+
+        private void Start()
+        {
             DontDestroyOnLoad();
             EnterInitialState();
             InitUITransitions();
@@ -74,9 +78,8 @@ namespace Internal.Runtime.Flow
 
         private IDependency[] GetUIDependencies()
         {
-            IEnumerable<IDependency> uiDependencies = _panelsProvider.PanelsParent.GetComponents<IDependency>();
-            IEnumerable<IDependency> panelDependencies = _panelsProvider.PanelsByStateType.Values.SelectMany(panel => panel.GetComponentsInChildren<IDependency>());
-            return uiDependencies.Concat(panelDependencies).ToArray();
+            IEnumerable<IDependency> uiDependencies = _panelsProvider.PanelsParent.GetComponentsInChildren<IDependency>();
+            return uiDependencies.ToArray();
         }
 
         private Type GetInitialState() => _statesProvider.InitialStateType;
@@ -87,7 +90,9 @@ namespace Internal.Runtime.Flow
             stateType = transition?.TargetType;
 
             if (stateType != null)
+            {
                 return true;
+            }
             
             stateType = _currentState?.OnUpdate();
             return stateType != null;
@@ -100,13 +105,19 @@ namespace Internal.Runtime.Flow
             _currentPanel = newPanel;
 
             if (oldPanel == newPanel)
+            {
                 return;
+            }
 
             if (oldPanel != null)
+            {
                 oldPanel.Disable();
-            
+            }
+
             if (newPanel != null)
+            {
                 newPanel.Enable();
+            }
             
             ExtendedDebug.Log($"Changing panel [{oldPanel}] to [{newPanel}]");
         }

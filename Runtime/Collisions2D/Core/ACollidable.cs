@@ -12,8 +12,8 @@ namespace Internal.Runtime.Collisions2D.Core
 
     public abstract class ACollidable : ACollectionItem<ACollidable>, ICollidable
     {
-        [field:SerializeField] public bool BelongsToPlayer { get; set; }
-        [field:SerializeField] public float Radius { get; set; }
+        [field: SerializeField] public bool BelongsToPlayer { get; set; }
+        [field: SerializeField] public float Radius { get; set; }
         
         public Vector3 Position => transform.position;
 

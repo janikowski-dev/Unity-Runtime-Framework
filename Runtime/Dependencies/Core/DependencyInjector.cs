@@ -17,6 +17,12 @@ namespace Internal.Runtime.Dependencies.Core
             }
         }
 
+        public static void AddRecipeElement<TDependency>(TDependency element) where TDependency : IDependency =>
+            GetRecipe<DependencyList<TDependency>>().Value.Add(element);
+
+        public static void RemoveRecipeElement<TDependency>(TDependency element) where TDependency : IDependency =>
+            GetRecipe<DependencyList<TDependency>>().Value.Remove(element);
+
         public static TDependency Get<TDependency>() where TDependency : IDependency
         {
             if (DependenciesByType.ContainsKey(typeof(TDependency)))
@@ -26,12 +32,6 @@ namespace Internal.Runtime.Dependencies.Core
 
             return default;
         }
-
-        public static void AddRecipeElement<TDependency>(TDependency element) where TDependency : IDependency =>
-            GetRecipe<DependencyList<TDependency>>().Value.Add(element);
-
-        public static void RemoveRecipeElement<TDependency>(TDependency element) where TDependency : IDependency =>
-            GetRecipe<DependencyList<TDependency>>().Value.Remove(element);
 
         public static void InjectListRecipe<TDependency>() where TDependency : IDependency =>
             DependencyRecipesByType.Add(typeof(DependencyList<TDependency>), new DependencyRecipe<DependencyList<TDependency>>

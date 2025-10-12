@@ -18,7 +18,7 @@ namespace Internal.Runtime.Pooling
     
     public class PoolItem : ADependencyElement<IPoolItem>, IPoolItem
     {
-        [field:SerializeField] public PoolItemType Type { get; set; }
+        [field: SerializeField] public PoolItemType Type { get; set; }
         
         private IPoolsProxy _poolsProxy = DependencyInjector.Get<IPoolsProxy>();
         
