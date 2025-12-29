@@ -1,25 +1,73 @@
-# Project Overview
+
+## Unity Runtime Framework
+
+A lightweight, modular **runtime framework for Unity** built to speed up development, enforce clean architecture, and scale well in performance-critical projects.
+
+This framework grew out of real production needs — reusable systems I used across multiple projects to avoid rewriting core logic and to keep projects flexible as they evolved.
+
+## Key Design Goals
+
+-   **Runtime-first** – focused on game code, not editor gimmicks
+-   **Low coupling** – systems are independent and easy to replace
+-   **Minimal overhead** – avoids unnecessary Unity abstractions
+-   **Drop-in friendly** – adopt individual systems without committing to everything
+    
+## Included Systems
 
 ### Quality of Life Tools (Editor)
-A set of tools that extend the editor's functionality, making working with Unity easier.
 
-### Dependency Injection System (Runtime/Dependencies)
-It’s lightweight and non-invasive, so the project remains functional even after switching architecture. Other systems rely on it for simple and flexible integration.
+A small set of editor extensions that streamline common workflows and reduce friction during development.
 
-### Game Loop System (Runtime/Flow)
-It uses a simple state machine pattern, making game flow easy to track and modify. Setting it up takes a few minutes at most.
+### Dependency Injection System (Runtime / Dependencies)
 
-### Custom 2D Collision System (Runtime/Collisions2D)
-Unity’s built-in physics can be resource-intensive, so this system is optimized for high-object-count scenarios, such as bullet-hell games. This system replaces the default physics for increased performance.
+A lightweight, non-invasive DI system used to wire runtime systems together.
 
-### Pooling System (Runtime/Pooling)
-This system is useful for games with many objects being created and reused.
+-   No heavy containers
+-   Minimal boilerplate
+-   Safe to remove or replace if architecture changes
+-   Used internally by other systems, but not required
 
-### Dialogue System (Runtime/Dialogues)
-It enables easy conversion of simple `.txt` files into in-game actions, streamlining the creation of dialogue sequences.
+### Game Loop System (Runtime / Flow)
 
-### Helper Scripts (Runtime/Utilities)
-A collection that includes smaller scripts that are useful across the project but don’t constitute full systems on their own.
+A simple, explicit **state-machine-based game loop**.
 
-### Use Case
-You can see most of these tools in action in my project: [Demo](https://github.com/toniezlydeveloper/Demo)
+-   Easy to reason about and debug
+-   Clear separation of game states
+-   Can be set up in minutes
+
+### Custom 2D Collision System (Runtime / Collisions2D)
+
+A performance-oriented alternative to Unity’s built-in 2D physics.
+
+-   Designed for **high object counts** (e.g. bullet-hell, arcade games)
+-   Deterministic and lightweight
+-   Replaces default physics where performance matters most
+
+### Pooling System (Runtime / Pooling)
+
+A generic object pooling solution for managing frequently spawned objects.
+
+-   Reduces GC pressure
+-   Simple, allocation-conscious API
+
+### Dialogue System (Runtime / Dialogues)
+
+A data-driven dialogue system based on plain text files.
+
+-   Converts `.txt` files into in-game actions
+-   Fast iteration for narrative content
+-   Keeps dialogue authoring simple and engine-agnostic
+
+### Helper Scripts (Runtime / Utilities)
+
+A collection of small, reusable utility scripts that support the framework but don’t form standalone systems.
+
+## Intended Audience
+
+This framework is aimed at:
+
+- Indie and solo developers
+- Gameplay programmers
+- Technical programmers working close to runtime systems
+    
+It’s not meant to replace Unity packages — it’s a **foundation you build on**.
