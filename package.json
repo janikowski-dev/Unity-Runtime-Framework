@@ -1,12 +1,12 @@
 {
-  "name": "com.toniezlydeveloper.internal",
+  "name": "com.janikowski-dev.internal",
   "version": "1.0.0",
-  "displayName": "Internal",
-  "description": "A set of useful scripts that makes development faster.",
+  "displayName": "Unity Runtime Framework",
+  "description": "Lightweight, modular runtime framework for Unity focused on clean architecture and performance.",
   "unity": "2021.3",
   "author": {
     "name": "Adam Janikowski",
     "email": "adam.janikowski99@gmail.com",
-    "url": "https://adam-janikowski.netlify.app/"
+    "url": "https://github.com/janikowski-dev/"
   }
 }
