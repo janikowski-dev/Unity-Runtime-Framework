@@ -5,6 +5,30 @@ A lightweight, modular **runtime framework for Unity** built to speed up develop
 
 This framework grew out of real production needs — reusable systems I used across multiple projects to avoid rewriting core logic and to keep projects flexible as they evolved.
 
+## Installation
+
+This package is distributed as a **Unity Package (UPM)** and can be installed directly from Git.
+
+### 1. Install dependency (LitMotion)
+
+This framework depends on **LitMotion** for tweening.
+
+1.  Open **Unity**
+2.  Go to **Window → Package Manager**
+3.  Click **➕**
+4.  Select **Add package from git URL…**
+5.  Paste:
+    `https://github.com/annulusgames/LitMotion.git?path=src/LitMotion/Assets/LitMotion` 
+6.  Click **Install**
+
+### 2. Install the framework
+
+1.  Click **➕** in the Package Manager
+2.  Select **Add package from git URL…**
+3.  Paste:
+    `https://github.com/janikowski-dev/Unity-Runtime-Framework.git` 
+4.  Click **Install**
+
 ## Key Design Goals
 
 -   **Runtime-first** – focused on game code, not editor gimmicks
