@@ -1,6 +1,6 @@
 {
   "name": "com.janikowski-dev.internal",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "displayName": "Unity Runtime Framework",
   "description": "Lightweight, modular runtime framework for Unity focused on clean architecture and performance.",
   "unity": "2021.3",
@@ -8,5 +8,8 @@
     "name": "Adam Janikowski",
     "email": "adam.janikowski99@gmail.com",
     "url": "https://github.com/janikowski-dev/"
+  },
+  "dependencies": {
+    "com.annulusgames.lit-motion": "https://github.com/annulusgames/LitMotion.git?path=src/LitMotion/Assets/LitMotion"
   }
 }

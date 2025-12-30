@@ -1,6 +1,6 @@
 using System;
-using DG.Tweening;
 using Internal.Runtime.Flow.States;
+using LitMotion;
 using UnityEngine;
 
 namespace Internal.Runtime.Flow.UI
@@ -21,21 +21,23 @@ namespace Internal.Runtime.Flow.UI
             Disable(true);
         }
 
-        public virtual Tween Disable(bool shouldSkipAnimation = false) => _canvasGroup.DOFade(0f, shouldSkipAnimation ? 0f : 0.25f)
-            .OnStart(() =>
-            {
-                _canvasGroup.blocksRaycasts = false;
-                _canvasGroup.interactable = false;
-            }).OnComplete(DisableCallback)
-            .SetUpdate(true);
+        public virtual MotionHandle Disable(bool shouldSkipAnimation = false)
+        {
+            ToggleInteraction(false);
+            return LMotion.Create(_canvasGroup.alpha, 0f, shouldSkipAnimation ? 0f : 0.25f)
+                .WithOnComplete(DisableCallback)
+                .WithScheduler(MotionScheduler.UpdateIgnoreTimeScale)
+                .Bind(x => _canvasGroup.alpha = x);
+        }
 
-        public virtual Tween Enable() => _canvasGroup.DOFade(1f, 0.25f)
-            .OnStart(() =>
-            {
-                _canvasGroup.blocksRaycasts = isInteractable;
-                _canvasGroup.interactable = isInteractable;
-            }).OnComplete(EnableCallback)
-            .SetUpdate(true);
+        public virtual MotionHandle Enable()
+        {
+            ToggleInteraction(isInteractable);
+            return LMotion.Create(_canvasGroup.alpha, 1f, 0.25f)
+                .WithOnComplete(EnableCallback)
+                .WithScheduler(MotionScheduler.UpdateIgnoreTimeScale)
+                .Bind(x => _canvasGroup.alpha = x);
+        }
 
         protected virtual void DisableCallback()
         {
@@ -48,5 +50,11 @@ namespace Internal.Runtime.Flow.UI
         protected void RequestTransition<TState>() where TState : AState => OnTransitionRequested?.Invoke(typeof(TState));
         
         private void GetReferences() => _canvasGroup = GetComponent<CanvasGroup>();
+
+        private void ToggleInteraction(bool state)
+        {
+            _canvasGroup.blocksRaycasts = state;
+            _canvasGroup.interactable = state;
+        }
     }
 }
